@@ -9,6 +9,7 @@ home: https://rclone.org/
 icon: https://rclone.org/img/rclone-16x16.png
 sources:
     - https://github.com/zee-ahmed/kube-rclone
-    - https://quay.io/repository/chaosaffe/rclone
+    - https://hub.docker.com/r/cyberpoison/rclone
 maintainers:
     - name: zee-ahmed
+    - name: cyberpoison
