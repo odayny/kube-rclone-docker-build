@@ -1,4 +1,6 @@
-# kube-rclone Updated to latest rclone (v1.62.0) next update will be when ProtonDrive as a API, or maybe sooner if requested.
+# ☸ kube-rclone ☸ 
+## Updated to latest rclone (v1.62.0) 
+#### Next update will be when ProtonDrive as a API, or maybe sooner if requested.
 
 ## Introduction
 
