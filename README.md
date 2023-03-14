@@ -10,6 +10,7 @@ kube-rclone is a rclone mount solution for Kubernetes. It allows you to sync fil
 * rclone config that has the cloud storage drive defined
 
 This can be created by running `rclone config` which will take you through an interactive configuration session to generate the `rclone.conf` file.
+
 Remember to create `/mnt/.cache/rclone/` folder for cache and point cache like this in your rclone.conf 
 ```
 [Cache Cloud Storage 3]
