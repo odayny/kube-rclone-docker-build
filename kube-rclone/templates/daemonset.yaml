@@ -63,6 +63,8 @@ spec:
         resources:
 {{- toYaml .Values.resources | nindent 10 }}
         volumeMounts:
+        - name: cache
+          mountPath: /config/rclone
         - name: config
           mountPath: /etc/rclone
         - name: data
@@ -79,6 +81,9 @@ spec:
       - name: media
         hostPath:
           path: {{ .Values.rclone.path }}
+      - name: cache
+        hostPath:
+          path: /mnt/.cache/rclone/
       - name: data
         hostPath:
           path: /var/lib/rclone/
