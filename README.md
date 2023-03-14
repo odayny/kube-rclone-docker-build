@@ -1,4 +1,4 @@
-# kube-rclone
+# kube-rclone Updated to latest rclone (v1.62.0) next update will be when ProtonDrive as a API, or maybe sooner if requested.
 
 ## Introduction
 
@@ -8,6 +8,18 @@ kube-rclone is a rclone mount solution for Kubernetes. It allows you to sync fil
 * rclone config that has the cloud storage drive defined
 
 This can be created by running `rclone config` which will take you through an interactive configuration session to generate the `rclone.conf` file.
+Remember to create `/mnt/.cache/rclone/` folder for cache and point cache like this in your rclone.conf 
+```
+[Cache Cloud Storage 3]
+type = cache
+remote = Cloud Storage 3:
+chunk_size = 32M
+info_age = 1d
+chunk_total_size = 64G
+db_path = /config/rclone/cache-backend/
+chunk_path = /config/rclone/cache-backend
+```
+_Adjust to your needs, just leave `db_path` and `chuck_path` as it is_.
 
 ## Setup
 The setup guide will help you get rclone running as a Daemonset on Kubernetes.
@@ -20,9 +32,9 @@ The setup guide will help you get rclone running as a Daemonset on Kubernetes.
     --namespace rclone \
     --set rclone.remote=[insert remote to mount here] \
     --set rclone.path=[insert mount path for remote] \
-    --set rclone.readOnly=true
+    --set rclone.readOnly=false
 ```
-
+If you want it to readOnly set it like this. `--set rclone.readOnly=true`
 This will deploy a Daemonset across the Kubernetes cluster that will run rclone with the mounted remote i.e Google Drive on the `hostPath` of the node which can be used with other services.
 
 Additional arguments can be set to customise `rclone mount` depending on the Kubernetes node resources. Some additional arguments have been commented out which are based on several user set-ups. They can be used based on user preference. Mount options can be found [here](https://rclone.org/commands/rclone_mount/#options)
@@ -50,3 +62,4 @@ Please raise an issue or pull request if you have any issues, questions or featu
 ## Credits
 
 Full credit list at: [https://github.com/zee-ahmed/kube-rclone/CREDITS.md](https://github.com/zee-ahmed/kube-rclone/blob/master/CREDITS.md)
+
