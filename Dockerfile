@@ -1,12 +1,15 @@
-FROM alpine:3.17.2
+# docker build . --platform linux/amd64,linux/arm64 -t odayny/kube-rclone:v1 --push    
+FROM alpine:3.19.1
 
-ARG RCLONE_VERSION=1.62.0
+ARG TARGETARCH
+# linux anyways
+ARG TARGETOS
+ARG RCLONE_VERSION=1.65.2
 
 RUN apk add --no-cache --virtual=build-dependencies wget unzip && \
-    cd tmp && \
-    wget -q --no-check-certificate https://downloads.rclone.org/v${RCLONE_VERSION}/rclone-v${RCLONE_VERSION}-linux-amd64.zip && \
-    unzip /tmp/rclone-v${RCLONE_VERSION}-linux-amd64.zip && \
-    mv /tmp/rclone-v${RCLONE_VERSION}-linux-amd64/rclone /usr/bin
+    wget -q https://downloads.rclone.org/v${RCLONE_VERSION}/rclone-v${RCLONE_VERSION}-${TARGETOS}-${TARGETARCH}.zip -O /tmp/rclone.zip && \
+    unzip /tmp/rclone.zip -d /tmp && \
+    mv /tmp/rclone-v${RCLONE_VERSION}-${TARGETOS}-${TARGETARCH}/rclone /usr/bin
 
 RUN apk -U add curl fuse ca-certificates && \
     rm -rf /var/cache/apk/*
